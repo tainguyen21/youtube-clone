@@ -115,7 +115,7 @@ function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           color: Colors.blackColor,
           backgroundColor: Colors.whiteColor,
@@ -129,6 +129,7 @@ function Header() {
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
+              edge="start"
             >
               <MenuIcon />
             </IconButton>

@@ -15,7 +15,7 @@ SideBar.propTypes = {};
 
 function SideBar(props) {
   return (
-    <SideBarContainer show={true}>
+    <SideBarContainer show="true">
       <List component="nav" aria-label="main mailbox folders">
         <ListItemButton selected={false} onClick={() => {}}>
           <ListItemIcon>
