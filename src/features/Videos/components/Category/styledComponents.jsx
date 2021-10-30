@@ -2,10 +2,12 @@ import { Chip, Stack } from "@mui/material";
 import { styled } from "@mui/system";
 import * as Colors from "assets/styles/colors";
 
-export const StackContent = styled(Stack)(({ theme }) => ({
-  overflow: "scroll",
-  scrollBehavior: "smooth",
+export const StackContent = styled(Stack)(({ theme, scroll_left, end }) => ({
   padding: theme.spacing(0.5, 2),
+  transition: "all linear 0.25s",
+  transform: `translateX(${
+    -scroll_left - (end === "true" ? parseInt(theme.spacing(3)) : 0)
+  }px)`,
 
   "&::-webkit-scrollbar": {
     display: "none",
@@ -15,7 +17,7 @@ export const StackContent = styled(Stack)(({ theme }) => ({
 export const Item = styled(Chip)(({ theme }) => ({
   fontSize: "14px",
   backgroundColor: Colors.grayColor,
-  transition: "all linear 0.25s",
+  transition: "all linear 0.3s",
 
   "&:hover": {
     backgroundColor: Colors.grayButtonHoverColor,
@@ -31,7 +33,6 @@ export const ArrowBox = styled("div")(({ theme, ...props }) => ({
   display: props.show === "true" ? "block" : "none",
 
   transform: "translateY(-50%)",
-  background: "rgb(255, 255, 255)",
   background:
     props.position === "left"
       ? "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 70%, rgba(255,255,255,0) 100%)"
@@ -39,4 +40,13 @@ export const ArrowBox = styled("div")(({ theme, ...props }) => ({
 
   paddingRight: props.position === "left" ? "24px" : "0",
   paddingLeft: props.position === "right" ? "24px" : "0",
+}));
+
+export const BoxContainer = styled("div")(({ theme }) => ({
+  padding: theme.spacing(1),
+  borderTop: `1px solid ${Colors.grayBorderColor}`,
+  borderBottom: `1px solid ${Colors.grayBorderColor}`,
+
+  position: "relative",
+  overflow: "hidden",
 }));

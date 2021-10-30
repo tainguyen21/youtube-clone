@@ -1,62 +1,101 @@
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { IconButton, Tooltip } from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { ArrowBox, Item, StackContent } from "./styledComponents";
+import React, { useEffect, useRef, useState } from "react";
+import { ArrowBox, BoxContainer, Item, StackContent } from "./styledComponents";
 
 Category.propTypes = {};
 
 function Category(props) {
   const [showArrowLeft, setShowArrowLeft] = useState(false);
   const [showArrowRight, setShowArrowRight] = useState(false);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const categoryScrollWidth = useRef(0);
+  const categoryOffsetWdith = useRef(0);
+  const wheelSpeed = 1;
+  const arrowClickSpace = 400;
 
   const handleWheel = (e) => {
-    const stack = document.getElementById("category");
-    stack.scrollLeft -= e.nativeEvent.wheelDelta * 10;
-
-    if (stack.scrollLeft === 0) setShowArrowLeft(false);
+    //When scroll to the leftmost
+    if (scrollLeft - e.nativeEvent.wheelDelta * wheelSpeed <= 0)
+      setShowArrowLeft(false);
     else setShowArrowLeft(true);
 
-    if (stack.offsetWidth + stack.scrollLeft == stack.scrollWidth)
+    //When scroll to the rightmost
+    if (
+      scrollLeft -
+        e.nativeEvent.wheelDelta * wheelSpeed +
+        categoryOffsetWdith.current >=
+      categoryScrollWidth.current
+    )
       setShowArrowRight(false);
     else setShowArrowRight(true);
+
+    //Update scrollLeft state, check scrollLeft < 0 or > scrollWidth
+    setScrollLeft((state) => {
+      if (state - e.nativeEvent.wheelDelta * wheelSpeed < 0) return 0;
+      else if (
+        state -
+          e.nativeEvent.wheelDelta * wheelSpeed +
+          categoryOffsetWdith.current >
+        categoryScrollWidth.current
+      )
+        return categoryScrollWidth.current - categoryOffsetWdith.current;
+      else return state - e.nativeEvent.wheelDelta * wheelSpeed;
+    });
   };
 
   const handleArrowClick = (direction) => {
-    const stack = document.getElementById("category");
-
+    //If click left arrow
     if (direction === -1) {
-      stack.scrollLeft -= 400;
-
       setShowArrowRight(true);
 
-      if (stack.scrollLeft <= 0) {
-        stack.scrollLeft = 0;
+      //Leftmost
+      if (scrollLeft - arrowClickSpace <= 0) {
         setShowArrowLeft(false);
       }
+
+      setScrollLeft((state) => {
+        if (state - arrowClickSpace < 0) return 0;
+        else return state - arrowClickSpace;
+      });
     }
 
+    //If click right arrow
     if (direction === 1) {
-      stack.scrollLeft += 400;
-
       setShowArrowLeft(true);
 
-      if (stack.scrollLeft + stack.offsetWidth >= stack.scrollWidth) {
-        stack.scrollLeft = stack.scrollWidth - stack.offsetWidth;
+      //Rightmost
+      if (
+        scrollLeft + categoryOffsetWdith.current + arrowClickSpace >=
+        categoryScrollWidth.current
+      ) {
         setShowArrowRight(false);
       }
+
+      setScrollLeft((state) => {
+        if (
+          state + arrowClickSpace + categoryOffsetWdith.current >
+          categoryScrollWidth.current
+        )
+          return categoryScrollWidth.current - categoryOffsetWdith.current;
+        else return state + arrowClickSpace;
+      });
     }
   };
 
   useEffect(() => {
+    //Get the scrollWidth and offsetWidth
     const stack = document.getElementById("category");
-    if (stack.offsetWidth + stack.scrollLeft < stack.scrollWidth)
-      setShowArrowRight(true);
+
+    categoryScrollWidth.current = stack.scrollWidth;
+    categoryOffsetWdith.current = stack.offsetWidth;
+
+    if (stack.offsetWidth < stack.scrollWidth) setShowArrowRight(true);
   }, []);
 
   return (
-    <Box sx={{ position: "relative", overflow: "hidden" }}>
+    <BoxContainer>
       <ArrowBox
         position="left"
         show={showArrowLeft.toString()}
@@ -82,6 +121,14 @@ function Category(props) {
         alignItems="center"
         spacing={1}
         id="category"
+        scroll_left={scrollLeft}
+        //Check end to add padding when scroll to rightmost
+        end={
+          categoryScrollWidth.current - categoryOffsetWdith.current ===
+          scrollLeft
+            ? "true"
+            : ""
+        }
       >
         <Tooltip title="Tất cả">
           <Item label="Tất cả" component="span" variant="outlined" clickable />
@@ -144,7 +191,7 @@ function Category(props) {
           <Item label="Tất cả" component="span" variant="outlined" clickable />
         </Tooltip>
       </StackContent>
-    </Box>
+    </BoxContainer>
   );
 }
 
