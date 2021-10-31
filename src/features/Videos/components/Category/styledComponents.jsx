@@ -38,8 +38,8 @@ export const ArrowBox = styled("div")(({ theme, ...props }) => ({
       ? "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 70%, rgba(255,255,255,0) 100%)"
       : "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 100%)",
 
-  paddingRight: props.position === "left" ? "24px" : "0",
-  paddingLeft: props.position === "right" ? "24px" : "0",
+  paddingRight: props.position === "left" ? theme.spacing(6) : "0",
+  paddingLeft: props.position === "right" ? theme.spacing(6) : "0",
 }));
 
 export const BoxContainer = styled("div")(({ theme }) => ({

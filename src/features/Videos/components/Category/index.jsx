@@ -4,9 +4,9 @@ import { IconButton, Tooltip } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowBox, BoxContainer, Item, StackContent } from "./styledComponents";
 
-Category.propTypes = {};
+VideosCategory.propTypes = {};
 
-function Category(props) {
+function VideosCategory(props) {
   const [showArrowLeft, setShowArrowLeft] = useState(false);
   const [showArrowRight, setShowArrowRight] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -195,4 +195,4 @@ function Category(props) {
   );
 }
 
-export default Category;
+export default VideosCategory;
