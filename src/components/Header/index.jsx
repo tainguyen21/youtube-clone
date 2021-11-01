@@ -14,8 +14,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { toggleSideBar } from "app/uiSlice";
 import * as Colors from "assets/styles/colors.js";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { Search, SearchIconWrapper, StyledInputBase } from "./styledComponents";
 
 function Header() {
@@ -24,6 +27,8 @@ function Header() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const dispatch = useDispatch();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -61,6 +66,10 @@ function Header() {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
+
+  const handleSideBarClick = () => {
+    dispatch(toggleSideBar());
+  };
 
   const renderMobileMenu = (
     <Menu
@@ -123,7 +132,10 @@ function Header() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center" }}
+            onClick={handleSideBarClick}
+          >
             <IconButton
               size="large"
               color="inherit"
@@ -133,18 +145,25 @@ function Header() {
             >
               <MenuIcon />
             </IconButton>
-            <Box
-              sx={{
-                display: { xs: "none", sm: "flex" },
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              <YouTubeIcon color="error" fontSize="large" />
-              <Typography variant="h6" component="span" fontWeight="bold">
-                YouTube
-              </Typography>
-            </Box>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Box
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <YouTubeIcon color="error" fontSize="large" />
+                <Typography
+                  variant="h6"
+                  component="span"
+                  fontWeight="bold"
+                  color="#000"
+                >
+                  YouTube
+                </Typography>
+              </Box>
+            </Link>
           </Box>
           <Search>
             <StyledInputBase

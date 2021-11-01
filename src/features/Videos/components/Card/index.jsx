@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { Box } from "@mui/system";
 import PropTypes from "prop-types";
 import React from "react";
+import { Link } from "react-router-dom";
 import { CardInfo, CardTitle, StyledCardContent } from "./styledComponent";
 
 VideosCard.propTypes = {
@@ -20,36 +21,38 @@ function VideosCard(props) {
   const theme = useTheme();
 
   return (
-    <Card
-      sx={{
-        backgroundColor: "transparent",
-        boxShadow: "none",
-        cursor: "pointer",
-      }}
-    >
-      <CardMedia
-        component="img"
-        height="142"
-        image={video.snippet.thumbnails.high.url}
-        alt="Video thumbnails"
-      />
-
-      <StyledCardContent>
-        <Avatar
-          alt="Channel"
-          src={video.snippet.thumbnails.default.url}
-          sx={{ width: 36, height: 36 }}
+    <Link to={`/watch/${video.id}`} style={{ textDecoration: "none" }}>
+      <Card
+        sx={{
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          cursor: "pointer",
+        }}
+      >
+        <CardMedia
+          component="img"
+          height="142"
+          image={video.snippet.thumbnails.high.url}
+          alt="Video thumbnails"
         />
-        <Box sx={{ marginLeft: theme.spacing(2), overflow: "hidden" }}>
-          <CardTitle>{video.snippet.title}</CardTitle>
-          <Tooltip title={video.snippet.channelTitle}>
-            <CardInfo>{video.snippet.channelTitle}</CardInfo>
-          </Tooltip>
-          <CardInfo>{video.statistics.viewCount} lượt xem</CardInfo>
-          <CardInfo>{video.snippet.publishedAt}</CardInfo>
-        </Box>
-      </StyledCardContent>
-    </Card>
+
+        <StyledCardContent>
+          <Avatar
+            alt="Channel"
+            src={video.snippet.thumbnails.default.url}
+            sx={{ width: 36, height: 36 }}
+          />
+          <Box sx={{ marginLeft: theme.spacing(2), overflow: "hidden" }}>
+            <CardTitle>{video.snippet.title}</CardTitle>
+            <Tooltip title={video.snippet.channelTitle}>
+              <CardInfo>{video.snippet.channelTitle}</CardInfo>
+            </Tooltip>
+            <CardInfo>{video.statistics.viewCount} lượt xem</CardInfo>
+            <CardInfo>{video.snippet.publishedAt}</CardInfo>
+          </Box>
+        </StyledCardContent>
+      </Card>
+    </Link>
   );
 }
 

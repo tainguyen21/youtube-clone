@@ -10,11 +10,12 @@ HomeMainPage.propTypes = {};
 
 function HomeMainPage(props) {
   const { videos, error, isLoading } = useSelector((state) => state.video);
+  const isShowSideBar = useSelector((state) => state.ui.isShowSideBar);
 
   return (
     <Box>
-      <SideBar />
-      <BoxContent>
+      <SideBar isShowSideBar={isShowSideBar} />
+      <BoxContent isShowSideBar={isShowSideBar.toString()}>
         <VideosCategory />
         <VideosList videos={videos} />
       </BoxContent>

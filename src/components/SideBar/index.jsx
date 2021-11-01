@@ -11,11 +11,19 @@ import {
   ListItemText,
 } from "@mui/material";
 
-SideBar.propTypes = {};
+SideBar.propTypes = {
+  isShowSideBar: PropTypes.bool,
+};
+
+SideBar.defaultProps = {
+  isShowSideBar: true,
+};
 
 function SideBar(props) {
+  const { isShowSideBar } = props;
+
   return (
-    <SideBarContainer show="true">
+    <SideBarContainer show={isShowSideBar.toString()}>
       <List component="nav" aria-label="main mailbox folders">
         <ListItemButton selected={false} onClick={() => {}}>
           <ListItemIcon>
