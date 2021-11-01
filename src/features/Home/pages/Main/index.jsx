@@ -1,20 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box } from "@mui/system";
 import SideBar from "components/SideBar";
 import VideosCategory from "features/Videos/components/Category";
 import { BoxContent } from "./styledComponent";
 import VideosList from "features/Videos/components/List";
+import { useSelector } from "react-redux";
 
 HomeMainPage.propTypes = {};
 
 function HomeMainPage(props) {
+  const { videos, error, isLoading } = useSelector((state) => state.video);
+
   return (
     <Box>
       <SideBar />
       <BoxContent>
         <VideosCategory />
-        <VideosList />
+        <VideosList videos={videos} />
       </BoxContent>
     </Box>
   );

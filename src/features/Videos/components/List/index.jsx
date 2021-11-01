@@ -3,10 +3,19 @@ import React from "react";
 import VideosCard from "../Card";
 import * as Colors from "assets/styles/colors";
 import { Box } from "@mui/system";
+import PropTypes from "prop-types";
 
-VideosList.propTypes = {};
+VideosList.propTypes = {
+  videos: PropTypes.array,
+};
+
+VideosList.defaultProps = {
+  videos: [],
+};
 
 function VideosList(props) {
+  const { videos } = props;
+
   return (
     <Box
       sx={{
@@ -23,21 +32,11 @@ function VideosList(props) {
           overflow: "hidden",
         }}
       >
-        <Grid item xs={3}>
-          <VideosCard />
-        </Grid>
-        <Grid item xs={3}>
-          <VideosCard />
-        </Grid>
-        <Grid item xs={3}>
-          <VideosCard />
-        </Grid>
-        <Grid item xs={3}>
-          <VideosCard />
-        </Grid>
-        <Grid item xs={3}>
-          <VideosCard />
-        </Grid>
+        {videos.map((video, index) => (
+          <Grid item xs={3} key={index}>
+            <VideosCard video={video} />
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );

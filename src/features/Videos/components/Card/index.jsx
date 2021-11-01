@@ -1,42 +1,54 @@
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Tooltip, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import { red } from "@mui/material/colors";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
+import PropTypes from "prop-types";
 import React from "react";
+import { CardInfo, CardTitle, StyledCardContent } from "./styledComponent";
 
-VideosCard.propTypes = {};
+VideosCard.propTypes = {
+  video: PropTypes.object,
+};
+
+VideosCard.defaultProps = {
+  video: {},
+};
 
 function VideosCard(props) {
+  const { video } = props;
+  const theme = useTheme();
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        backgroundColor: "transparent",
+        boxShadow: "none",
+        cursor: "pointer",
+      }}
+    >
       <CardMedia
         component="img"
-        height="150"
-        image="https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=869&q=80"
-        alt="Paella dish"
+        height="142"
+        image={video.snippet.thumbnails.high.url}
+        alt="Video thumbnails"
       />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
 
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
+      <StyledCardContent>
+        <Avatar
+          alt="Channel"
+          src={video.snippet.thumbnails.default.url}
+          sx={{ width: 36, height: 36 }}
+        />
+        <Box sx={{ marginLeft: theme.spacing(2), overflow: "hidden" }}>
+          <CardTitle>{video.snippet.title}</CardTitle>
+          <Tooltip title={video.snippet.channelTitle}>
+            <CardInfo>{video.snippet.channelTitle}</CardInfo>
+          </Tooltip>
+          <CardInfo>{video.statistics.viewCount} lượt xem</CardInfo>
+          <CardInfo>{video.snippet.publishedAt}</CardInfo>
+        </Box>
+      </StyledCardContent>
     </Card>
   );
 }

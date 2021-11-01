@@ -5,3 +5,4 @@ export const grayBorderColor = "#d3d3d3";
 export const grayButtonHoverColor = "#F0F0F0";
 export const inputFocusColor = "#065fd4";
 export const videosListBackgroundColor = "#F9F9F9";
+export const textVideoCardColor = "#606060";
