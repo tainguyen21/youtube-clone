@@ -8,7 +8,6 @@ export const WatchPageContainer = styled("div")(({ theme }) => ({
 }));
 
 export const VideoContainer = styled("div")(({ theme }) => ({
-  width: "100%",
   height: 0,
   paddingBottom: "calc(9/16*100%)",
   position: "relative",
@@ -20,4 +19,24 @@ export const VideoContainer = styled("div")(({ theme }) => ({
     width: "100%",
     height: "100%",
   },
+}));
+
+export const VideoTitle = styled("h3")(({ theme }) => ({
+  fontSize: "18px",
+  letterSpacing: 0,
+  fontWeight: 500,
+
+  display: "-webkit-box",
+  textOverflow: "ellipsis",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: "2",
+  overflow: "hidden",
+
+  margin: theme.spacing(2, 0, 0.5, 0),
+}));
+
+export const VideoHeading = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
 }));

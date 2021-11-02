@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import videoApi from "apis/videos/videoApi";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isShowSideBar: true,

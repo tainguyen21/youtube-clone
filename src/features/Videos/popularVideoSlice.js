@@ -48,7 +48,7 @@ export const videoSlice = createSlice({
       return {
         ...state,
         isLoading: false,
-        erorr: action.payload.error.message,
+        erorr: action.error.message,
       };
     },
   },
