@@ -13,10 +13,12 @@ import { VideoDescription } from "./styledComonent";
 
 VideoWatch.propTypes = {
   video: PropTypes.object,
+  comments: PropTypes.array,
 };
 
 VideoWatch.defaultProps = {
   video: {},
+  comments: [],
 };
 
 const descriptionStyle = {
@@ -28,7 +30,7 @@ const descriptionStyle = {
 };
 
 function VideoWatch(props) {
-  const { video } = props;
+  const { video, comments } = props;
   const [showAllDescription, setShowAllDescription] = useState(false);
   const theme = useTheme();
 
@@ -41,8 +43,8 @@ function VideoWatch(props) {
   const channelDescription =
     video && video.snippet ? video.snippet.description : " ";
 
-  console.log({ video });
-  console.log(channelDescription);
+  // console.log(channelDescription);
+  console.log({ comments });
 
   const handleShowDescriptionClick = () => {
     setShowAllDescription((state) => !state);
@@ -125,7 +127,7 @@ function VideoWatch(props) {
             }}
           >
             <VideoDescription
-              desStyle={showAllDescription ? {} : descriptionStyle}
+              desstyle={showAllDescription ? {} : descriptionStyle}
             >
               {channelDescription}
             </VideoDescription>

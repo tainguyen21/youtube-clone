@@ -31,7 +31,7 @@ function VideosCard(props) {
       >
         <CardMedia
           component="img"
-          height="142"
+          height="175"
           image={video.snippet.thumbnails.high.url}
           alt="Video thumbnails"
         />

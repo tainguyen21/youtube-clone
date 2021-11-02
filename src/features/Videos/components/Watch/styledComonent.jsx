@@ -34,12 +34,12 @@ export const VideoHeading = styled("div")(({ theme }) => ({
   alignItems: "center",
 }));
 
-export const VideoDescription = styled("pre")(({ theme, desStyle }) => ({
+export const VideoDescription = styled("pre")(({ theme, desstyle }) => ({
   whiteSpace: "pre-wrap",
   letterSpacing: 0,
   fontFamily: "Roboto",
   fontSize: "14px",
   transition: "all linear 0.25s",
 
-  ...desStyle,
+  ...desstyle,
 }));

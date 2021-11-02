@@ -1,21 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import videoApi from "apis/videoApi";
+import commentApi from "apis/commentApi";
 
 const initialState = {
   isLoading: false,
-  videos: [],
+  comments: [],
   nextPageToken: null,
   error: "",
 };
 
-export const fetchPopularVideos = createAsyncThunk(
-  "video/fetchPopularVideos",
+export const fetchComments = createAsyncThunk(
+  "comments/fetchComments",
   async (params) => {
-    const response = await videoApi.getVideos({
-      part: ["id", "player", "snippet", "statistics"],
-      chart: "mostPopular",
-      maxResults: 40,
-      regionCode: "VN",
+    const response = await commentApi.getComments({
+      part: ["id", "replies", "snippet"],
+      videoId: params.videoId,
+      maxResults: 20,
+      order: "relevance",
       key: process.env.REACT_APP_API_KEY,
       pageToken: (params && params.pageToken) || null,
     });
@@ -24,27 +24,27 @@ export const fetchPopularVideos = createAsyncThunk(
   }
 );
 
-export const videoSlice = createSlice({
-  name: "video",
+export const commentsSlice = createSlice({
+  name: "comments",
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchPopularVideos.pending]: (state, action) => {
+    [fetchComments.pending]: (state, action) => {
       return {
         ...state,
         isLoading: true,
         error: "",
       };
     },
-    [fetchPopularVideos.fulfilled]: (state, action) => {
+    [fetchComments.fulfilled]: (state, action) => {
       return {
         isLoading: false,
-        videos: [...state.videos, ...action.payload.items],
+        comments: [...state.comments, ...action.payload.items],
         nextPageToken: action.payload.nextPageToken,
         error: "",
       };
     },
-    [fetchPopularVideos.rejected]: (state, action) => {
+    [fetchComments.rejected]: (state, action) => {
       return {
         ...state,
         isLoading: false,
@@ -55,6 +55,6 @@ export const videoSlice = createSlice({
 });
 
 //Actions
-//export const {} = videoSlice.actions;
+//export const {} = commentsSlice.actions;
 
-export default videoSlice.reducer;
+export default commentsSlice.reducer;
