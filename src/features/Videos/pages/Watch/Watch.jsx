@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { closeSideBar } from "app/uiSlice";
 import { fetchComments } from "features/Videos/commentsSlice";
 import VideoWatch from "features/Videos/components/Watch";
+import { fetchRelatedVideos } from "features/Videos/relatedVideoSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
@@ -17,9 +18,18 @@ function WatchVideopage(props) {
   const video = useSelector((state) =>
     state.video.videos.find((item) => item.id === id)
   );
-  const { comments, isLoading, error, nextPageToken } = useSelector(
-    (state) => state.comments
-  );
+  const {
+    comments,
+    isLoading: isLoadingComment,
+    error: errorComment,
+    nextPageToken: nextPageTokenComment,
+  } = useSelector((state) => state.comments);
+  const {
+    videos: relatedVideos,
+    isLoading: isLoadingRelated,
+    error: errorRelated,
+    nextPageToken: nextPageTokenRelated,
+  } = useSelector((state) => state.relatedVideos);
 
   useEffect(() => {
     dispatch(closeSideBar());
@@ -28,7 +38,14 @@ function WatchVideopage(props) {
         videoId: id,
       })
     );
+    dispatch(
+      fetchRelatedVideos({
+        videoId: id,
+      })
+    );
   }, []);
+
+  console.log(relatedVideos);
 
   return (
     <WatchPageContainer>
