@@ -1,11 +1,13 @@
-import { Grid } from "@mui/material";
+import { Grid, Modal } from "@mui/material";
 import { Box, useTheme } from "@mui/system";
 import { closeSideBar } from "app/uiSlice";
+import SideBar from "components/SideBar";
 import { fetchComments } from "features/Videos/commentsSlice";
 import RelatedItem from "features/Videos/components/RelatedItem";
 import VideoWatch from "features/Videos/components/Watch";
 import { fetchRelatedVideos } from "features/Videos/relatedVideoSlice";
-import React, { useEffect } from "react";
+import { fetchVideoById } from "features/Videos/watchVideoSlice";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
@@ -15,11 +17,14 @@ WatchVideopage.propTypes = {};
 
 function WatchVideopage(props) {
   const match = useRouteMatch();
-  const dispatch = useDispatch();
   const { id } = match.params;
-  const video = useSelector((state) =>
-    state.video.videos.find((item) => item.id === id)
-  );
+
+  const dispatch = useDispatch();
+
+  const video = useSelector((state) => state.watchVideo.video);
+
+  const isShowSideBar = useSelector((state) => state.ui.isShowSideBar);
+
   const {
     comments,
     isLoading: isLoadingComment,
@@ -38,6 +43,11 @@ function WatchVideopage(props) {
   useEffect(() => {
     dispatch(closeSideBar());
     dispatch(
+      fetchVideoById({
+        videoId: id,
+      })
+    );
+    dispatch(
       fetchComments({
         videoId: id,
       })
@@ -47,12 +57,17 @@ function WatchVideopage(props) {
         videoId: id,
       })
     );
-  }, []);
+  }, [id]);
 
-  console.log(relatedVideos);
+  const handleModalClose = () => {
+    dispatch(closeSideBar());
+  };
 
   return (
     <WatchPageContainer>
+      <Modal open={isShowSideBar} onClose={handleModalClose}>
+        <SideBar isShowSideBar={isShowSideBar} background modal />
+      </Modal>
       <Grid container spacing={3}>
         <Grid item xs={8}>
           <VideoWatch video={video} comments={comments} />

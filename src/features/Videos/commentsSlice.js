@@ -21,7 +21,10 @@ export const fetchComments = createAsyncThunk(
       pageToken: (params && params.pageToken) || null,
     });
 
-    return response.data;
+    return {
+      ...response.data,
+      id: params.videoId,
+    };
   }
 );
 
@@ -41,12 +44,12 @@ export const commentsSlice = createSlice({
       return {
         isLoading: false,
         comments:
-          state.id === action.payload.etag
+          state.id === action.payload.id
             ? [...state.comments, ...action.payload.items]
             : [...action.payload.items],
         nextPageToken: action.payload.nextPageToken,
         error: "",
-        id: action.payload.etag,
+        id: action.payload.id,
       };
     },
     [fetchComments.rejected]: (state, action) => {

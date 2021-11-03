@@ -12,7 +12,7 @@ export const fetchPopularVideos = createAsyncThunk(
   "video/fetchPopularVideos",
   async (params) => {
     const response = await videoApi.getVideos({
-      part: ["id", "player", "snippet", "statistics"],
+      part: ["id", "snippet", "statistics"],
       chart: "mostPopular",
       maxResults: 40,
       regionCode: "VN",

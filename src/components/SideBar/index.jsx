@@ -20,10 +20,14 @@ SideBar.defaultProps = {
 };
 
 function SideBar(props) {
-  const { isShowSideBar } = props;
+  const { isShowSideBar, background, modal } = props;
 
   return (
-    <SideBarContainer show={isShowSideBar.toString()}>
+    <SideBarContainer
+      show={isShowSideBar.toString()}
+      background={background ? background.toString() : ""}
+      modal={modal ? modal.toString() : ""}
+    >
       <List component="nav" aria-label="main mailbox folders">
         <ListItemButton selected={false} onClick={() => {}}>
           <ListItemIcon>

@@ -22,7 +22,10 @@ export const fetchRelatedVideos = createAsyncThunk(
       pageToken: (params && params.pageToken) || null,
     });
 
-    return response.data;
+    return {
+      ...response.data,
+      id: params.videoId,
+    };
   }
 );
 
@@ -42,12 +45,12 @@ export const relatedVideosSlice = createSlice({
       return {
         isLoading: false,
         videos:
-          state.id === action.payload.etag
+          state.id === action.payload.id
             ? [...state.videos, ...action.payload.items]
             : [...action.payload.items],
         nextPageToken: action.payload.nextPageToken,
         error: "",
-        id: action.payload.etag,
+        id: action.payload.id,
       };
     },
     [fetchRelatedVideos.rejected]: (state, action) => {
