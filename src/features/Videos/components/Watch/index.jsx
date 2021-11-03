@@ -10,6 +10,7 @@ import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import * as Colors from "assets/styles/colors";
 import { Link } from "react-router-dom";
 import { VideoDescription } from "./styledComonent";
+import CommentBox from "../CommentBox";
 
 VideoWatch.propTypes = {
   video: PropTypes.object,
@@ -42,9 +43,8 @@ function VideoWatch(props) {
     video && video.snippet ? video.snippet.channelTitle : " ";
   const channelDescription =
     video && video.snippet ? video.snippet.description : " ";
-
-  // console.log(channelDescription);
-  console.log({ comments });
+  const totalComments =
+    video && video.statistics ? video.statistics.commentCoung : 0;
 
   const handleShowDescriptionClick = () => {
     setShowAllDescription((state) => !state);
@@ -150,6 +150,7 @@ function VideoWatch(props) {
           </Button>
         </Grid>
       </Grid>
+      <CommentBox comments={comments} total={totalComments} />
     </div>
   );
 }
