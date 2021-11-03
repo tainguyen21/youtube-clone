@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import commentApi from "apis/commentApi";
 import videoApi from "apis/videoApi";
 
 const initialState = {
@@ -7,6 +6,7 @@ const initialState = {
   videos: [],
   nextPageToken: null,
   error: "",
+  id: null,
 };
 
 export const fetchRelatedVideos = createAsyncThunk(
@@ -41,9 +41,13 @@ export const relatedVideosSlice = createSlice({
     [fetchRelatedVideos.fulfilled]: (state, action) => {
       return {
         isLoading: false,
-        videos: [...state.videos, ...action.payload.items],
+        videos:
+          state.id === action.payload.etag
+            ? [...state.videos, ...action.payload.items]
+            : [...action.payload.items],
         nextPageToken: action.payload.nextPageToken,
         error: "",
+        id: action.payload.etag,
       };
     },
     [fetchRelatedVideos.rejected]: (state, action) => {

@@ -1,12 +1,14 @@
 import { Grid } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, useTheme } from "@mui/system";
 import { closeSideBar } from "app/uiSlice";
 import { fetchComments } from "features/Videos/commentsSlice";
+import RelatedItem from "features/Videos/components/RelatedItem";
 import VideoWatch from "features/Videos/components/Watch";
 import { fetchRelatedVideos } from "features/Videos/relatedVideoSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 import { WatchPageContainer } from "./styledComponent";
 
 WatchVideopage.propTypes = {};
@@ -31,6 +33,8 @@ function WatchVideopage(props) {
     nextPageToken: nextPageTokenRelated,
   } = useSelector((state) => state.relatedVideos);
 
+  const theme = useTheme();
+
   useEffect(() => {
     dispatch(closeSideBar());
     dispatch(
@@ -54,7 +58,16 @@ function WatchVideopage(props) {
           <VideoWatch video={video} comments={comments} />
         </Grid>
         <Grid item xs={4}>
-          123
+          {relatedVideos.map((video, index) => (
+            <Box key={index} sx={{ marginTop: theme.spacing(1.5) }}>
+              <Link
+                to={`/watch/${video.id.videoId}`}
+                style={{ textDecoration: "none" }}
+              >
+                <RelatedItem video={video} />
+              </Link>
+            </Box>
+          ))}
         </Grid>
       </Grid>
     </WatchPageContainer>

@@ -6,6 +6,7 @@ const initialState = {
   comments: [],
   nextPageToken: null,
   error: "",
+  id: null,
 };
 
 export const fetchComments = createAsyncThunk(
@@ -39,9 +40,13 @@ export const commentsSlice = createSlice({
     [fetchComments.fulfilled]: (state, action) => {
       return {
         isLoading: false,
-        comments: [...state.comments, ...action.payload.items],
+        comments:
+          state.id === action.payload.etag
+            ? [...state.comments, ...action.payload.items]
+            : [...action.payload.items],
         nextPageToken: action.payload.nextPageToken,
         error: "",
+        id: action.payload.etag,
       };
     },
     [fetchComments.rejected]: (state, action) => {
