@@ -15,7 +15,7 @@ export const fetchRelatedVideos = createAsyncThunk(
     const response = await videoApi.getRelatedVideos({
       part: ["snippet"],
       relatedToVideoId: params.videoId,
-      maxResults: 20,
+      maxResults: 10,
       type: "video",
       order: "relevance",
       key: process.env.REACT_APP_API_KEY,

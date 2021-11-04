@@ -2,7 +2,7 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import * as Colors from "assets/styles/colors";
 
-export const Search = styled("div")(({ theme }) => ({
+export const Search = styled("form")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${Colors.grayBorderColor}`,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -15,7 +15,7 @@ export const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-export const SearchIconWrapper = styled("div")(({ theme }) => ({
+export const SearchIconWrapper = styled("button")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -23,6 +23,7 @@ export const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(1, 3),
 
   backgroundColor: Colors.grayColor,
+  border: "none",
   borderLeft: `1px solid ${Colors.grayBorderColor}`,
   cursor: "pointer",
   transition: "all linear 0.2s",

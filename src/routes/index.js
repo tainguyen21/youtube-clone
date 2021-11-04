@@ -2,6 +2,7 @@ import React from "react";
 import HomeMainPage from "features/Home/pages/Main";
 import NotFound from "components/NotFound";
 import WatchVideopage from "features/Videos/pages/Watch/Watch";
+import SearchPage from "features/Search/pages/Main";
 
 export const routes = [
   {
@@ -13,6 +14,11 @@ export const routes = [
     path: "/watch/:id",
     exact: false,
     component: () => <WatchVideopage />,
+  },
+  {
+    path: "/search/:keyword",
+    exact: false,
+    component: () => <SearchPage />,
   },
   {
     path: "",

@@ -15,7 +15,7 @@ export const fetchComments = createAsyncThunk(
     const response = await commentApi.getComments({
       part: ["id", "snippet"],
       videoId: params.videoId,
-      maxResults: 20,
+      maxResults: 10,
       order: "relevance",
       key: process.env.REACT_APP_API_KEY,
       pageToken: (params && params.pageToken) || null,

@@ -20,6 +20,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Search, SearchIconWrapper, StyledInputBase } from "./styledComponents";
+import { useForm } from "react-hook-form";
+import { searchByKeyWord } from "features/Search/searchSlice";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -46,6 +48,14 @@ function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const { register, handleSubmit, watch } = useForm();
+  const onSubmit = (data) =>
+    dispatch(
+      searchByKeyWord({
+        keyword: data.keyword,
+      })
+    );
 
   const renderMenu = (
     <Menu
@@ -165,13 +175,14 @@ function Header() {
               </Box>
             </Link>
           </Box>
-          <Search>
+          <Search onSubmit={handleSubmit(onSubmit)} autocomplete="off">
             <StyledInputBase
               placeholder="Tìm kiếm"
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{ "aria-label": "search", ...register("keyword") }}
+              required
             />
             <Tooltip title="Tìm kiếm">
-              <SearchIconWrapper>
+              <SearchIconWrapper type="submit">
                 <SearchIcon />
               </SearchIconWrapper>
             </Tooltip>
