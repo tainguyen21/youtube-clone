@@ -14,7 +14,7 @@ function SearchPage(props) {
 
   return (
     <SearchPageContainer margin_left={isShowSideBar.toString()}>
-      <SideBar background isShowSideBar={isShowSideBar} />
+      <SideBar background show={isShowSideBar} />
       <SearchResultContainer>
         {videos.map((video, index) => (
           <Box sx={{ marginBottom: theme.spacing(2.5) }} key={index}>

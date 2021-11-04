@@ -7,15 +7,15 @@ import RelatedItem from "features/Videos/components/RelatedItem";
 import VideoWatch from "features/Videos/components/Watch";
 import { fetchRelatedVideos } from "features/Videos/relatedVideoSlice";
 import { fetchVideoById } from "features/Videos/watchVideoSlice";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { WatchPageContainer } from "./styledComponent";
 
-WatchVideopage.propTypes = {};
+WatchVideoPage.propTypes = {};
 
-function WatchVideopage(props) {
+function WatchVideoPage(props) {
   const match = useRouteMatch();
   const { id } = match.params;
 
@@ -27,15 +27,15 @@ function WatchVideopage(props) {
 
   const {
     comments,
-    isLoading: isLoadingComment,
-    error: errorComment,
-    nextPageToken: nextPageTokenComment,
+    // isLoading: isLoadingComment,
+    // error: errorComment,
+    // nextPageToken: nextPageTokenComment,
   } = useSelector((state) => state.comments);
   const {
     videos: relatedVideos,
-    isLoading: isLoadingRelated,
-    error: errorRelated,
-    nextPageToken: nextPageTokenRelated,
+    // isLoading: isLoadingRelated,
+    // error: errorRelated,
+    // nextPageToken: nextPageTokenRelated,
   } = useSelector((state) => state.relatedVideos);
 
   const theme = useTheme();
@@ -57,7 +57,7 @@ function WatchVideopage(props) {
         videoId: id,
       })
     );
-  }, [id]);
+  }, [id, dispatch]);
 
   const handleModalClose = () => {
     dispatch(closeSideBar());
@@ -66,7 +66,9 @@ function WatchVideopage(props) {
   return (
     <WatchPageContainer>
       <Modal open={isShowSideBar} onClose={handleModalClose}>
-        <SideBar isShowSideBar={isShowSideBar} background modal />
+        <div>
+          <SideBar show={isShowSideBar} background modal />
+        </div>
       </Modal>
       <Grid container spacing={3}>
         <Grid item xs={8}>
@@ -89,4 +91,4 @@ function WatchVideopage(props) {
   );
 }
 
-export default WatchVideopage;
+export default WatchVideoPage;

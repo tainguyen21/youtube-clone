@@ -14,14 +14,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { toggleSideBar } from "app/uiSlice";
+import { closeSideBar, toggleSideBar } from "app/uiSlice";
 import * as Colors from "assets/styles/colors.js";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { Search, SearchIconWrapper, StyledInputBase } from "./styledComponents";
-import { useForm } from "react-hook-form";
 import { searchByKeyWord } from "features/Search/searchSlice";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { Search, SearchIconWrapper, StyledInputBase } from "./styledComponents";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,6 +31,7 @@ function Header() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -49,13 +50,17 @@ function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const { register, handleSubmit, watch } = useForm();
-  const onSubmit = (data) =>
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
     dispatch(
       searchByKeyWord({
         keyword: data.keyword,
       })
     );
+    dispatch(closeSideBar());
+
+    history.push(`/search/${data.keyword}`);
+  };
 
   const renderMenu = (
     <Menu
@@ -175,7 +180,7 @@ function Header() {
               </Box>
             </Link>
           </Box>
-          <Search onSubmit={handleSubmit(onSubmit)} autocomplete="off">
+          <Search onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <StyledInputBase
               placeholder="Tìm kiếm"
               inputProps={{ "aria-label": "search", ...register("keyword") }}

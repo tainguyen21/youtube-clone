@@ -3,8 +3,15 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { IconButton, Tooltip } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowBox, BoxContainer, Item, StackContent } from "./styledComponents";
+import PropTypes from "prop-types";
 
-VideosCategory.propTypes = {};
+VideosCategory.propTypes = {
+  category: PropTypes.array,
+};
+
+VideosCategory.defaultProps = {
+  category: [],
+};
 
 function VideosCategory(props) {
   const [showArrowLeft, setShowArrowLeft] = useState(false);
@@ -14,6 +21,8 @@ function VideosCategory(props) {
   const categoryOffsetWdith = useRef(0);
   const wheelSpeed = 1;
   const arrowClickSpace = 400;
+
+  const { category } = props;
 
   const handleWheel = (e) => {
     //When scroll to the leftmost
@@ -130,66 +139,16 @@ function VideosCategory(props) {
             : ""
         }
       >
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
-        <Tooltip title="Tất cả">
-          <Item label="Tất cả" component="span" variant="outlined" clickable />
-        </Tooltip>
+        {category.map((item, index) => (
+          <Tooltip title="Tất cả" key={index}>
+            <Item
+              label={item.snippet.title || ""}
+              component="span"
+              variant="outlined"
+              clickable
+            />
+          </Tooltip>
+        ))}
       </StackContent>
     </BoxContainer>
   );

@@ -20,13 +20,13 @@ function CommentItem(props) {
   const theme = useTheme();
 
   const {
-    authorChannelUrl,
+    //authorChannelUrl,
     authorDisplayName,
     authorProfileImageUrl,
     likeCount,
     publishedAt,
     textOriginal,
-    authorChannelId: { value: authorChannelId },
+    //authorChannelId: { value: authorChannelId },
   } = comment && comment.snippet ? comment.snippet.topLevelComment.snippet : {};
 
   return (

@@ -12,19 +12,19 @@ import {
 } from "@mui/material";
 
 SideBar.propTypes = {
-  isShowSideBar: PropTypes.bool,
+  show: PropTypes.bool,
 };
 
 SideBar.defaultProps = {
-  isShowSideBar: true,
+  show: true,
 };
 
 function SideBar(props) {
-  const { isShowSideBar, background, modal } = props;
+  const { show, background, modal } = props;
 
   return (
     <SideBarContainer
-      show={isShowSideBar.toString()}
+      show={show.toString()}
       background={background ? background.toString() : ""}
       modal={modal ? modal.toString() : ""}
     >

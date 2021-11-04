@@ -1,14 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Card, CardMedia, Tooltip, Typography } from "@mui/material";
 import { Box, useTheme } from "@mui/system";
+import PropTypes from "prop-types";
+import React from "react";
 import { Title } from "./styledItem";
 
 RelatedItem.propTypes = {
@@ -45,7 +38,7 @@ function RelatedItem(props) {
       />
       <Box sx={{ marginLeft: theme.spacing(1) }}>
         <Title>{title}</Title>
-        <Tooltip title={channelTitle}>
+        <Tooltip title={channelTitle || ""}>
           <Typography
             sx={{ fontSize: "14px", overflow: "hidden" }}
             varient="body2"

@@ -28,9 +28,6 @@ function SearchItem(props) {
   const videoImageUrl =
     thumbnails && thumbnails.high ? thumbnails.high.url : "";
 
-  console.log(videoId);
-  console.log(channelId);
-
   return (
     <Link
       to={videoId ? `/watch/${videoId}` : `/channel/${channelId}`}
