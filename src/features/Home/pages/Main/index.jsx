@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import SideBar from "components/SideBar";
-import { fetchCategory } from "features/Videos/categorySlice";
+import { fetchCategory, setActive } from "features/Videos/categorySlice";
 import VideosCategory from "features/Videos/components/Category";
 import VideosList from "features/Videos/components/List";
 import React, { useEffect } from "react";
@@ -13,7 +13,16 @@ function HomeMainPage(props) {
   const { videos /*error, isLoading*/ } = useSelector((state) => state.video);
   const isShowSideBar = useSelector((state) => state.ui.isShowSideBar);
   const category = useSelector((state) => state.category.category);
+  const active = useSelector((state) => state.category.active);
   const dispatch = useDispatch();
+
+  const handleCategoryClick = (active) => {
+    dispatch(setActive(active));
+  };
+
+  const filterVideo = videos.filter((item) =>
+    active === "0" ? true : item.snippet.categoryId === active
+  );
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -23,8 +32,12 @@ function HomeMainPage(props) {
     <Box>
       <SideBar show={isShowSideBar} />
       <BoxContent show_sidebar={isShowSideBar.toString()}>
-        <VideosCategory category={category} />
-        <VideosList videos={videos} />
+        <VideosCategory
+          category={category}
+          onCategoryClick={handleCategoryClick}
+          active={active}
+        />
+        <VideosList videos={filterVideo} />
       </BoxContent>
     </Box>
   );

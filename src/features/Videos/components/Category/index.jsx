@@ -7,10 +7,14 @@ import PropTypes from "prop-types";
 
 VideosCategory.propTypes = {
   category: PropTypes.array,
+  onCategoryClick: PropTypes.func,
+  active: PropTypes.string,
 };
 
 VideosCategory.defaultProps = {
   category: [],
+  onCategoryClick: null,
+  active: "0",
 };
 
 function VideosCategory(props) {
@@ -22,7 +26,7 @@ function VideosCategory(props) {
   const wheelSpeed = 1;
   const arrowClickSpace = 400;
 
-  const { category } = props;
+  const { category, onCategoryClick, active } = props;
 
   const handleWheel = (e) => {
     //When scroll to the leftmost
@@ -101,7 +105,7 @@ function VideosCategory(props) {
     categoryOffsetWdith.current = stack.offsetWidth;
 
     if (stack.offsetWidth < stack.scrollWidth) setShowArrowRight(true);
-  }, []);
+  }, [category]);
 
   return (
     <BoxContainer>
@@ -140,12 +144,19 @@ function VideosCategory(props) {
         }
       >
         {category.map((item, index) => (
-          <Tooltip title="Tất cả" key={index}>
+          <Tooltip
+            title="Tất cả"
+            key={index}
+            onClick={() => {
+              if (onCategoryClick) onCategoryClick(item.id);
+            }}
+          >
             <Item
               label={item.snippet.title || ""}
               component="span"
               variant="outlined"
               clickable
+              active={item.id === active ? "true" : "false"}
             />
           </Tooltip>
         ))}

@@ -14,13 +14,15 @@ export const StackContent = styled(Stack)(({ theme, scroll_left, end }) => ({
   },
 }));
 
-export const Item = styled(Chip)(({ theme }) => ({
+export const Item = styled(Chip)(({ theme, active }) => ({
   fontSize: "14px",
-  backgroundColor: Colors.grayColor,
   transition: "all linear 0.3s",
 
+  color: active === "true" ? Colors.whiteColor : "",
+  backgroundColor: active === "true" ? Colors.blackColor : "",
+
   "&:hover": {
-    backgroundColor: Colors.grayButtonHoverColor,
+    color: active === "true" ? Colors.blackColor : "",
   },
 }));
 

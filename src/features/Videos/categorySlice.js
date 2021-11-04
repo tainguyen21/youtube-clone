@@ -4,9 +4,8 @@ import categoryApi from "apis/categoryApi";
 const initialState = {
   isLoading: false,
   category: [],
-
   error: "",
-  id: null,
+  active: "0",
 };
 
 export const fetchCategory = createAsyncThunk(
@@ -25,7 +24,11 @@ export const fetchCategory = createAsyncThunk(
 export const categorySlice = createSlice({
   name: "category",
   initialState,
-  reducers: {},
+  reducers: {
+    setActive: (state, action) => {
+      state.active = action.payload;
+    },
+  },
   extraReducers: {
     [fetchCategory.pending]: (state, action) => {
       return {
@@ -37,9 +40,12 @@ export const categorySlice = createSlice({
     [fetchCategory.fulfilled]: (state, action) => {
       return {
         isLoading: false,
-        category: action.payload.items,
-
+        category: [
+          { id: "0", snippet: { title: "All" } },
+          ...action.payload.items,
+        ],
         error: "",
+        active: "0",
       };
     },
     [fetchCategory.rejected]: (state, action) => {
@@ -53,6 +59,6 @@ export const categorySlice = createSlice({
 });
 
 //Actions
-//export const {} = categorySlice.actions;
+export const { setActive } = categorySlice.actions;
 
 export default categorySlice.reducer;
