@@ -3,6 +3,7 @@ import HomeMainPage from "features/Home/pages/Main";
 import NotFound from "components/NotFound";
 import WatchVideopage from "features/Videos/pages/Watch/Watch";
 import SearchPage from "features/Search/pages/Main";
+import ChannelMainPage from "features/Channel/pages/Main";
 
 export const routes = [
   {
@@ -19,6 +20,11 @@ export const routes = [
     path: "/search/:keyword",
     exact: false,
     component: () => <SearchPage />,
+  },
+  {
+    path: "/channel/:id",
+    exact: false,
+    component: () => <ChannelMainPage />,
   },
   {
     path: "",

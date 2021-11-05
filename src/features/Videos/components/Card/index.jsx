@@ -37,16 +37,23 @@ function VideosCard(props) {
         />
 
         <StyledCardContent>
-          <Avatar
-            alt="Channel"
-            src={video.snippet.thumbnails.default.url}
-            sx={{ width: 36, height: 36 }}
-          />
+          <Link to={`/channel/${video.snippet.channelId}`}>
+            <Avatar
+              alt="Channel"
+              src={video.snippet.thumbnails.default.url}
+              sx={{ width: 36, height: 36 }}
+            />
+          </Link>
           <Box sx={{ marginLeft: theme.spacing(2), overflow: "hidden" }}>
             <CardTitle>{video.snippet.title}</CardTitle>
-            <Tooltip title={video.snippet.channelTitle}>
-              <CardInfo>{video.snippet.channelTitle}</CardInfo>
-            </Tooltip>
+            <Link
+              to={`/channel/${video.snippet.channelId}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Tooltip title={video.snippet.channelTitle}>
+                <CardInfo>{video.snippet.channelTitle}</CardInfo>
+              </Tooltip>
+            </Link>
             <CardInfo>{video.statistics.viewCount} lượt xem</CardInfo>
             <CardInfo>{video.snippet.publishedAt}</CardInfo>
           </Box>

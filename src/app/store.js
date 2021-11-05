@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import channelSlice from "features/Channel/channelSlice";
 import searchSlice from "features/Search/searchSlice";
 import categorySlice from "features/Videos/categorySlice";
 import commentsSlice from "features/Videos/commentsSlice";
@@ -16,5 +17,6 @@ export const store = configureStore({
     watchVideo: watchVideoSlice,
     searchVideo: searchSlice,
     category: categorySlice,
+    channel: channelSlice,
   },
 });

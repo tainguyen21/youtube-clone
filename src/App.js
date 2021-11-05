@@ -1,3 +1,4 @@
+import "firebase/index";
 import CssBaseline from "@mui/material/CssBaseline";
 import Header from "components/Header";
 import { fetchPopularVideos } from "features/Videos/popularVideoSlice";

@@ -10,6 +10,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import * as Colors from "assets/styles/colors";
 
 SideBar.propTypes = {
   show: PropTypes.bool,
@@ -29,14 +31,20 @@ function SideBar(props) {
       modal={modal ? modal.toString() : ""}
     >
       <List component="nav" aria-label="main mailbox folders">
-        <ListItemButton selected={false} onClick={() => {}}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText disableTypography={true} sx={{ fontSize: "medium" }}>
-            Inbox
-          </ListItemText>
-        </ListItemButton>
+        <Link
+          to="/"
+          style={{ textDecoration: "none", color: Colors.blackColor }}
+        >
+          <ListItemButton selected={false} onClick={() => {}}>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText disableTypography={true} sx={{ fontSize: "medium" }}>
+              Trang chủ
+            </ListItemText>
+          </ListItemButton>
+        </Link>
+
         <ListItemButton selected={false} onClick={() => {}}>
           <ListItemIcon>
             <DraftsIcon />
@@ -53,15 +61,7 @@ function SideBar(props) {
             <InboxIcon />
           </ListItemIcon>
           <ListItemText disableTypography={true} sx={{ fontSize: "medium" }}>
-            Inbox
-          </ListItemText>
-        </ListItemButton>
-        <ListItemButton selected={false} onClick={() => {}}>
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText disableTypography={true} sx={{ fontSize: "medium" }}>
-            Inbox
+            Đăng xuất
           </ListItemText>
         </ListItemButton>
       </List>

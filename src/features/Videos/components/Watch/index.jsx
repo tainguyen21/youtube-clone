@@ -36,7 +36,7 @@ function VideoWatch(props) {
   const theme = useTheme();
 
   const iframeVideo =
-    video && video.player ? video.player.embedHtml : "<div>123</div>";
+    video && video.player ? video.player.embedHtml : "<div></div>";
   const channelAvatar =
     video && video.snippet ? video.snippet.thumbnails.standard.url : " ";
   const channelTitle =
@@ -45,6 +45,7 @@ function VideoWatch(props) {
     video && video.snippet ? video.snippet.description : " ";
   const totalComments =
     video && video.statistics ? video.statistics.commentCoung : 0;
+  const channelId = video && video.snippet ? video.snippet.channelId : " ";
 
   const handleShowDescriptionClick = () => {
     setShowAllDescription((state) => !state);
@@ -99,7 +100,7 @@ function VideoWatch(props) {
       >
         <Grid item xs={10}>
           <Link
-            to="/"
+            to={`/channel/${channelId}`}
             style={{ textDecoration: "none", color: Colors.blackColor }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
