@@ -6,6 +6,16 @@ export const SearchItemTitle = styled("h4")(({ theme }) => ({
   fontSize: "18px",
   fontWeight: 500,
   overflow: "hidden",
+
+  display: "-webkit-box",
+  textOverflow: "ellipsis",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: "2",
+  overflow: "hidden",
+
+  [theme.breakpoints.down("sm")]: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 export const SearchItemSubTitle = styled("span")(({ theme }) => ({

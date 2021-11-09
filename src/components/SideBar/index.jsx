@@ -44,17 +44,8 @@ function SideBar(props) {
             </ListItemText>
           </ListItemButton>
         </Link>
-
-        <ListItemButton selected={false} onClick={() => {}}>
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText disableTypography={true} sx={{ fontSize: "medium" }}>
-            Inbox
-          </ListItemText>
-        </ListItemButton>
       </List>
-      <Divider />
+      {/* <Divider />
       <List component="nav" aria-label="main mailbox folders">
         <ListItemButton selected={false} onClick={() => {}}>
           <ListItemIcon>
@@ -64,7 +55,7 @@ function SideBar(props) {
             Đăng xuất
           </ListItemText>
         </ListItemButton>
-      </List>
+      </List> */}
     </SideBarContainer>
   );
 }

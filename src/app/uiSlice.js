@@ -15,10 +15,14 @@ export const uiSlice = createSlice({
     closeSideBar: (state, action) => {
       state.isShowSideBar = false;
     },
+
+    openSideBar: (state, action) => {
+      state.isShowSideBar = true;
+    },
   },
 });
 
 //Actions
-export const { toggleSideBar, closeSideBar } = uiSlice.actions;
+export const { toggleSideBar, closeSideBar, openSideBar } = uiSlice.actions;
 
 export default uiSlice.reducer;

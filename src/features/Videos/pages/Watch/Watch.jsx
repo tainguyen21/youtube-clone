@@ -67,14 +67,14 @@ function WatchVideoPage(props) {
     <WatchPageContainer>
       <Modal open={isShowSideBar} onClose={handleModalClose}>
         <div>
-          <SideBar show={isShowSideBar} background modal />
+          <SideBar show={isShowSideBar} modal />
         </div>
       </Modal>
       <Grid container spacing={3}>
-        <Grid item xs={8}>
+        <Grid item md={8}>
           <VideoWatch video={video} comments={comments} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item md={4}>
           {relatedVideos.map((video, index) => (
             <Box key={index} sx={{ marginTop: theme.spacing(1.5) }}>
               <Link

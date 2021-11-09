@@ -33,7 +33,7 @@ function VideosList(props) {
         }}
       >
         {videos.map((video, index) => (
-          <Grid item xs={3} key={index}>
+          <Grid item sx={6} sm={4} md={3} key={index}>
             <VideosCard video={video} />
           </Grid>
         ))}

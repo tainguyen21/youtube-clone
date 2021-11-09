@@ -39,6 +39,9 @@ function SearchItem(props) {
           boxShadow: "none",
           cursor: "pointer",
           display: "flex",
+          [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+          },
         }}
       >
         <CardMedia
@@ -49,6 +52,11 @@ function SearchItem(props) {
             marginRight: theme.spacing(2),
             flexShrink: 0,
             borderRadius: channelId ? "50%" : 0,
+
+            [theme.breakpoints.down("sm")]: {
+              width: "100%",
+              height: "202px",
+            },
           }}
           image={videoImageUrl}
           alt="Video thumbnails"

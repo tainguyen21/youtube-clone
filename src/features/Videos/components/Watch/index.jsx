@@ -98,7 +98,7 @@ function VideoWatch(props) {
           borderBottom: `1px solid ${Colors.grayBorderColor}`,
         }}
       >
-        <Grid item xs={10}>
+        <Grid item sm={10} xs={12}>
           <Link
             to={`/channel/${channelId}`}
             style={{ textDecoration: "none", color: Colors.blackColor }}
@@ -123,8 +123,11 @@ function VideoWatch(props) {
           </Link>
           <Box
             sx={{
-              marginLeft: `calc(48px + ${theme.spacing(2)})`,
+              marginLeft: {
+                sm: `calc(48px + ${theme.spacing(2)})`,
+              },
               marginTop: theme.spacing(1),
+              overflow: "hidden",
             }}
           >
             <VideoDescription
@@ -145,7 +148,16 @@ function VideoWatch(props) {
             </Typography>
           </Box>
         </Grid>
-        <Grid item xs={2} textAlign="end">
+        <Grid
+          item
+          sm={2}
+          xs={12}
+          sx={{
+            textAlign: {
+              sm: "end",
+            },
+          }}
+        >
           <Button variant="contained" color="error">
             Đăng ký
           </Button>

@@ -1,5 +1,6 @@
 import { Avatar, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
+import { openSideBar } from "app/uiSlice";
 import SideBar from "components/SideBar";
 import {
   fetchChannelById,
@@ -20,6 +21,7 @@ function ChannelMainPage(props) {
   const id = match.params.id;
   const dispatch = useDispatch();
   const channel = useSelector((state) => state.channel.channel);
+  const videos = useSelector((state) => state.channel.videos);
 
   const isShowSideBar = useSelector((state) => state.ui.isShowSideBar);
 
@@ -32,6 +34,8 @@ function ChannelMainPage(props) {
     thumbnails && thumbnails.default ? thumbnails.default.url : "";
 
   useEffect(() => {
+    dispatch(openSideBar());
+
     dispatch(
       fetchChannelById({
         channelId: id,
@@ -70,7 +74,7 @@ function ChannelMainPage(props) {
         >
           Video đã tải lên
         </Typography>
-        <ChannelVideoList />
+        <ChannelVideoList videos={videos} />
       </Box>
     </ChannelPageContainer>
   );

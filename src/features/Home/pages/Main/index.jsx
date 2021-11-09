@@ -1,4 +1,5 @@
 import { Box } from "@mui/system";
+import { openSideBar } from "app/uiSlice";
 import SideBar from "components/SideBar";
 import { fetchCategory, setActive } from "features/Videos/categorySlice";
 import VideosCategory from "features/Videos/components/Category";
@@ -26,6 +27,7 @@ function HomeMainPage(props) {
 
   useEffect(() => {
     dispatch(fetchCategory());
+    dispatch(openSideBar());
   }, [dispatch]);
 
   return (

@@ -2,6 +2,7 @@ import { styled } from "@mui/system";
 
 export const VideoContainer = styled("div")(({ theme }) => ({
   height: 0,
+  width: "100%",
   paddingBottom: "calc(9/16*100%)",
   position: "relative",
 
@@ -30,16 +31,27 @@ export const VideoTitle = styled("h3")(({ theme }) => ({
 
 export const VideoHeading = styled("div")(({ theme }) => ({
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
+  alignItems: "flex-start",
+  flexDirection: "column",
+
+  [theme.breakpoints.up("sm")]: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 }));
 
-export const VideoDescription = styled("pre")(({ theme, desstyle }) => ({
+export const VideoDescription = styled("div")(({ theme, desstyle }) => ({
   whiteSpace: "pre-wrap",
   letterSpacing: 0,
   fontFamily: "Roboto",
   fontSize: "14px",
   transition: "all linear 0.25s",
+  overflow: "hidden",
+
+  [theme.breakpoints.down("sm")]: {
+    width: "100vw",
+  },
 
   ...desstyle,
 }));
