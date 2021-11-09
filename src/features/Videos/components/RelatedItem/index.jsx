@@ -5,6 +5,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Title } from "./styledItem";
 import * as Colors from "assets/styles/colors";
+import { formatTime } from "utils/common";
 
 RelatedItem.propTypes = {
   video: PropTypes.object,
@@ -59,7 +60,7 @@ function RelatedItem(props) {
           varient="body2"
           component="p"
         >
-          {publishedAt}
+          {formatTime(publishedAt)} trước
         </Typography>
       </Box>
     </Card>

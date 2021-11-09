@@ -4,6 +4,7 @@ import { Box, useTheme } from "@mui/system";
 import { Avatar, Button, Tooltip, Typography } from "@mui/material";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import * as Colors from "assets/styles/colors";
+import { formatTime } from "utils/common";
 
 CommentItem.propTypes = {
   comment: PropTypes.object,
@@ -46,7 +47,7 @@ function CommentItem(props) {
           {authorDisplayName}
         </Typography>
         <Typography variant="body2" component="span">
-          {publishedAt}
+          {formatTime(publishedAt)} trước
         </Typography>
         <Typography variant="body2" component="p" sx={{ lineHeight: 1.6 }}>
           {textOriginal}

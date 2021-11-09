@@ -6,6 +6,7 @@ import { Box } from "@mui/system";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
+import { formatTime, formatViews } from "utils/common";
 import { CardInfo, CardTitle, StyledCardContent } from "./styledComponent";
 
 VideosCard.propTypes = {
@@ -54,8 +55,10 @@ function VideosCard(props) {
                 <CardInfo>{video.snippet.channelTitle}</CardInfo>
               </Tooltip>
             </Link>
-            <CardInfo>{video.statistics.viewCount} lượt xem</CardInfo>
-            <CardInfo>{video.snippet.publishedAt}</CardInfo>
+            <CardInfo>
+              {formatViews(video.statistics.viewCount)} lượt xem
+            </CardInfo>
+            <CardInfo>{formatTime(video.snippet.publishedAt)} trước</CardInfo>
           </Box>
         </StyledCardContent>
       </Card>

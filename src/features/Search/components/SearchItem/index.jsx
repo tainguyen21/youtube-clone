@@ -8,6 +8,7 @@ import {
   SearchItemTitle,
 } from "./styledComponent";
 import PropTypes from "prop-types";
+import { formatTime } from "utils/common";
 
 SearchItem.propTypes = {
   video: PropTypes.object,
@@ -64,7 +65,9 @@ function SearchItem(props) {
         <div>
           <SearchItemTitle>{title}</SearchItemTitle>
           <Box sx={{ marginTop: theme.spacing(0.5) }}>
-            <SearchItemSubTitle>{`${publishedAt}`}</SearchItemSubTitle>
+            <SearchItemSubTitle>
+              {formatTime(publishedAt)} trước
+            </SearchItemSubTitle>
           </Box>
           <Box
             sx={{
